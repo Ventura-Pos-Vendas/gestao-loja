@@ -1414,6 +1414,51 @@ function showAlert(el, msg, type) {
   el.innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
 }
 
+// ============================================================
+//  FUNÇÃO ATUALIZAR (FORA DO addEventListener)
+// ============================================================
+function atualizarTudo() {
+  // Mostra loading no botão do menu (se existir)
+  const btnAtualizar = document.querySelector('.nav-item[onclick*="atualizarTudo"]');
+  if (btnAtualizar) {
+    const originalText = btnAtualizar.innerHTML;
+    btnAtualizar.innerHTML = '<span class="nav-icon">🔄</span> Atualizando...';
+    btnAtualizar.style.opacity = '0.7';
+    
+    setTimeout(async () => {
+      try {
+        if (!demoMode) {
+          await loadOrders();
+          await loadParts();
+        }
+        
+        renderDashboard();
+        renderOrders();
+        renderParts();
+        renderFinanceiro();
+        
+        btnAtualizar.innerHTML = '✅ Atualizado!';
+        setTimeout(() => {
+          btnAtualizar.innerHTML = originalText;
+          btnAtualizar.style.opacity = '1';
+        }, 800);
+      } catch(e) {
+        btnAtualizar.innerHTML = '❌ Erro!';
+        setTimeout(() => {
+          btnAtualizar.innerHTML = originalText;
+          btnAtualizar.style.opacity = '1';
+        }, 1000);
+      }
+    }, 100);
+  } else {
+    // Versão simples sem animação
+    location.reload();
+  }
+}
+
+// ============================================================
+//  CONFIGURAÇÃO INICIAL
+// ============================================================
 document.querySelectorAll('.modal-overlay').forEach(o => {
   o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
 });
@@ -1429,13 +1474,8 @@ window.addEventListener('load', () => {
       });
     } catch(e) {}
   }
-
-// RECARREGAR PAGINA
-function atualizarTudo() {
-  location.reload(); // Recarrega a página inteira
-}
-
 });
+
 </script>
 </body>
 </html>
