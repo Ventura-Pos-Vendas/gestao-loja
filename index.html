@@ -295,6 +295,7 @@
     <div class="sidebar" id="sidebar">
       <div class="sidebar-logo">⚙ GestãoLoja</div>
       <nav>
+        </div><button class="btn btn-primary" onclick="atualizarTudo()" style="background: var(--info);">🔄 Atualizar</button></div>
         <div class="nav-item active" onclick="showPage('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
         <div class="nav-item" onclick="showPage('financeiro')"><span class="nav-icon">💰</span> Financeiro</div>
         <div class="nav-item" onclick="showPage('pedidos')"><span class="nav-icon">📋</span> Pedidos</div>
@@ -658,12 +659,12 @@ function loadFirebaseConfig() {
   if (stored) return JSON.parse(stored);
   // Default hardcoded config (overridden by localStorage)
   return {
-    apiKey: "AIzaSyAyy2KDd-IbgNc5PZQFNWdL8cZJUMTVH_8",
-    authDomain: "sistema-loja-ventura.firebaseapp.com",
-    projectId: "sistema-loja-ventura",
-    storageBucket: "sistema-loja-ventura.firebasestorage.app",
-    messagingSenderId: "200578022403",
-    appId: "1:200578022403:web:733cc3bf098ab4aeac2236"
+    apiKey: "AIzaSyBGJd3AjqgND-eeTnjcwv66z1EBF-pkWTE",
+    authDomain: "gestao-loja-ventura.firebaseapp.com",
+    projectId: "gestao-loja-ventura",
+    storageBucket: "gestao-loja-ventura.firebasestorage.app",
+    messagingSenderId: "1048440300536",
+    appId: "1:1048440300536:web:c622363dd8e62ac217ac0d"
   };
 }
 
@@ -1428,6 +1429,12 @@ window.addEventListener('load', () => {
       });
     } catch(e) {}
   }
+
+// RECARREGAR PAGINA
+function atualizarTudo() {
+  location.reload(); // Recarrega a página inteira
+}
+
 });
 </script>
 </body>
